@@ -1,9 +1,5 @@
-// Word list - all uppercase
-const WORDS = [
-  "RALPH", "REYVA", "RUGBY", "SCOUT", "BAGEL", "SPAIN", "SUSHI", "LABOR", "LEGAL", "SPICY",
-  "BEARD", "LEXUS", "HIKER", "CARGO", "KAREN", "JOSHO", "BENNY", "ADITI", "COURT", "VAMOS",
-  "SCHUL", "SWIMS", "VOLVO", "JUDGE"
-];
+// TODO: Add your own 5-letter words here (all uppercase)
+const WORDS = [];
 
 // Launch date for day index calculation
 const LAUNCH_DATE = "2026-02-08";
