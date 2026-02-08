@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff4040"/>
+      <stop offset="100%" stop-color="#aa0000"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#40ff40"/>
+      <stop offset="100%" stop-color="#008800"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4080ff"/>
+      <stop offset="100%" stop-color="#0044aa"/>
+    </linearGradient>
+    <linearGradient id="g4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffdd44"/>
+      <stop offset="100%" stop-color="#cc8800"/>
+    </linearGradient>
+    <linearGradient id="g5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#cc44ff"/>
+      <stop offset="100%" stop-color="#660088"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#bb8866"/>
+      <stop offset="100%" stop-color="#553322"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Tower 1 (far left) -->
+  <path d="M30 140 L30 100 Q30 85 35 75 L35 70 L40 55 L45 70 L45 75 Q50 85 50 100 L50 140 Z" fill="url(#g1)"/>
+  <path d="M35 75 L40 55 L45 75 Q43 80 40 80 Q37 80 35 75" fill="#ffdd00"/>
+  <rect x="32" y="100" width="16" height="100" fill="url(#wall)"/>
+
+  <!-- Tower 2 -->
+  <path d="M70 140 L70 90 Q68 70 80 50 Q92 70 90 90 L90 140 Z" fill="url(#g2)"/>
+  <circle cx="80" cy="45" r="6" fill="#ffdd00"/>
+  <rect x="78" y="30" width="4" height="15" fill="#ffdd00"/>
+  <rect x="72" y="90" width="16" height="110" fill="url(#wall)"/>
+
+  <!-- Tower 3 -->
+  <path d="M110 140 L110 80 Q105 55 125 30 Q145 55 140 80 L140 140 Z" fill="url(#g3)"/>
+  <circle cx="125" cy="24" r="7" fill="#ffdd00"/>
+  <rect x="122" y="5" width="6" height="19" fill="#ffdd00"/>
+  <rect x="112" y="80" width="26" height="120" fill="url(#wall)"/>
+
+  <!-- MAIN TOWER (center) -->
+  <path d="M165 140 L165 70 Q155 40 200 5 Q245 40 235 70 L235 140 Z" fill="url(#g1)"/>
+  <path d="M175 65 Q168 42 200 15 Q232 42 225 65 Q200 80 175 65" fill="#ffffff" opacity="0.4"/>
+  <path d="M182 58 Q178 40 200 22 Q222 40 218 58 Q200 70 182 58" fill="url(#g2)" opacity="0.9"/>
+  <circle cx="200" cy="8" r="9" fill="#ffdd00"/>
+  <rect x="196" y="-10" width="8" height="18" fill="#ffdd00"/>
+  <rect x="168" y="70" width="64" height="130" fill="url(#wall)"/>
+  <rect x="185" y="100" width="30" height="45" rx="15" fill="#442200"/>
+  <rect x="192" y="105" width="16" height="35" rx="8" fill="#ffcc00"/>
+
+  <!-- Tower 5 -->
+  <path d="M260 140 L260 85 Q255 60 275 40 Q295 60 290 85 L290 140 Z" fill="url(#g4)"/>
+  <circle cx="275" cy="34" r="7" fill="#ffdd00"/>
+  <rect x="272" y="18" width="6" height="16" fill="#ffdd00"/>
+  <rect x="262" y="85" width="26" height="115" fill="url(#wall)"/>
+
+  <!-- Tower 6 -->
+  <path d="M310 140 L310 95 Q308 75 325 55 Q342 75 340 95 L340 140 Z" fill="url(#g5)"/>
+  <circle cx="325" cy="49" r="6" fill="#ffdd00"/>
+  <rect x="322" y="35" width="6" height="14" fill="#ffdd00"/>
+  <rect x="312" y="95" width="26" height="105" fill="url(#wall)"/>
+
+  <!-- Tower 7 (far right) -->
+  <path d="M360 140 L360 110 Q358 95 370 80 Q382 95 380 110 L380 140 Z" fill="url(#g1)"/>
+  <circle cx="370" cy="75" r="5" fill="#ffdd00"/>
+  <rect x="367" y="62" width="6" height="13" fill="#ffdd00"/>
+  <rect x="362" y="110" width="16" height="90" fill="url(#wall)"/>
+</svg>

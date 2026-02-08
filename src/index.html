@@ -24,24 +24,24 @@
         <div id="grid" class="grid"></div>
       </div>
 
-      <!-- Stats panel -->
+      <!-- Stats panel - Tetris style -->
       <aside class="stats-panel">
-        <h2>STATS</h2>
+        <h2>STATISTICS</h2>
         <div class="stat-row">
-          <span class="stat-label">DAY:</span>
+          <span class="stat-label">LEVEL</span>
           <span id="stat-day" class="stat-value">1 / 10</span>
         </div>
         <div class="stat-row">
-          <span class="stat-label">STREAK:</span>
+          <span class="stat-label">LINES</span>
           <span id="stat-streak" class="stat-value">0</span>
         </div>
         <div class="stat-row">
-          <span class="stat-label">BEST:</span>
+          <span class="stat-label">TOP</span>
           <span id="stat-best" class="stat-value">0</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-row">
-          <span class="stat-label">NEXT WORD IN</span>
+          <span class="stat-label">NEXT</span>
         </div>
         <div id="countdown" class="countdown">00:00:00</div>
       </aside>
@@ -69,9 +69,8 @@
       <div class="popup popup-lose">
         <div class="popup-content">
           <div class="popup-icon">&#x1F4A5;</div>
-          <div class="popup-title">GAME OVER</div>
-          <p>THE WORD WAS:</p>
-          <div id="lose-word" class="reveal-word"></div>
+          <div class="popup-title">NOT QUITE!</div>
+          <p>WANT TO TRY AGAIN?</p>
           <button id="retry-btn" class="popup-btn popup-btn-retry">TRY AGAIN</button>
         </div>
       </div>

@@ -7,7 +7,7 @@
 
 /* CSS Variables */
 :root {
-  --color-bg: #0A0A2A;
+  --color-bg: #000014;
   --color-grid-line: #1A1A4A;
   --color-empty: #1C1C3C;
   --color-correct: #00FF66;
@@ -20,8 +20,17 @@
   --color-stats-text: #8888CC;
   --color-title: #FF3333;
 
+  /* Tetromino colors */
+  --tetro-i: #00FFFF;  /* Cyan - I piece */
+  --tetro-o: #FFFF00;  /* Yellow - O piece */
+  --tetro-t: #AA00FF;  /* Purple - T piece */
+  --tetro-s: #00FF00;  /* Green - S piece */
+  --tetro-z: #FF0000;  /* Red - Z piece */
+  --tetro-j: #0000FF;  /* Blue - J piece */
+  --tetro-l: #FF8800;  /* Orange - L piece */
+
   --tile-size: 60px;
-  --tile-gap: 4px;
+  --tile-gap: 3px;
   --key-height: 48px;
 }
 
@@ -39,10 +48,26 @@ html, body {
   overscroll-behavior: none;
 }
 
+/* Russian Spires Background - St. Basil's Cathedral silhouette */
 body {
   font-family: "Press Start 2P", "Courier New", monospace;
   background: var(--color-bg);
   color: var(--color-text);
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background:
+    url("/st-basils.svg") bottom center / contain no-repeat;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
 }
 
 /* App container */
@@ -53,6 +78,8 @@ body {
   max-width: 600px;
   margin: 0 auto;
   padding: 8px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Header */
@@ -115,21 +142,39 @@ body {
   align-items: flex-start;
 }
 
-/* Grid */
+/* Grid - Tetris playfield style with visible grid lines */
 .grid {
   display: flex;
   flex-direction: column;
-  gap: var(--tile-gap);
-  padding: 8px;
-  background: linear-gradient(135deg, #0D0D35 0%, #0A0A2A 100%);
-  border: 3px solid var(--color-grid-line);
+  gap: 0;
+  padding: 4px;
+  background:
+    linear-gradient(to right, var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(135deg, #0D0D35 0%, #0A0A2A 100%);
+  background-size: calc(var(--tile-size) + var(--tile-gap)) calc(var(--tile-size) + var(--tile-gap)),
+                   calc(var(--tile-size) + var(--tile-gap)) calc(var(--tile-size) + var(--tile-gap)),
+                   100% 100%;
+  border: 4px solid;
+  border-color: #4A4A8A #1A1A3A #1A1A3A #4A4A8A;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .grid-row {
   display: flex;
   gap: var(--tile-gap);
+  padding: 0 2px;
 }
 
+.grid-row:first-child {
+  padding-top: 2px;
+}
+
+.grid-row:last-child {
+  padding-bottom: 2px;
+}
+
+/* Tiles with tetromino colors per row */
 .tile {
   width: var(--tile-size);
   height: var(--tile-size);
@@ -141,14 +186,54 @@ body {
   color: var(--color-text);
   background: var(--color-empty);
   border: 3px solid;
-  border-color: #4A4A7A #1A1A3A #1A1A3A #4A4A7A;
+  border-color: #3A3A5A #1A1A2A #1A1A2A #3A3A5A;
   text-transform: uppercase;
-  transition: background-color 0.1s;
+  margin: calc(var(--tile-gap) / 2) 0;
 }
 
+/* Tetromino colors for each row when filled */
+.grid-row[data-row="0"] .tile.filled:not(.correct):not(.present):not(.absent) {
+  background: color-mix(in srgb, var(--tetro-i) 30%, var(--color-empty));
+  border-color: color-mix(in srgb, var(--tetro-i) 50%, #4A4A7A) color-mix(in srgb, var(--tetro-i) 30%, #1A1A3A) color-mix(in srgb, var(--tetro-i) 30%, #1A1A3A) color-mix(in srgb, var(--tetro-i) 50%, #4A4A7A);
+}
+.grid-row[data-row="1"] .tile.filled:not(.correct):not(.present):not(.absent) {
+  background: color-mix(in srgb, var(--tetro-o) 30%, var(--color-empty));
+  border-color: color-mix(in srgb, var(--tetro-o) 50%, #4A4A7A) color-mix(in srgb, var(--tetro-o) 30%, #1A1A3A) color-mix(in srgb, var(--tetro-o) 30%, #1A1A3A) color-mix(in srgb, var(--tetro-o) 50%, #4A4A7A);
+}
+.grid-row[data-row="2"] .tile.filled:not(.correct):not(.present):not(.absent) {
+  background: color-mix(in srgb, var(--tetro-t) 30%, var(--color-empty));
+  border-color: color-mix(in srgb, var(--tetro-t) 50%, #4A4A7A) color-mix(in srgb, var(--tetro-t) 30%, #1A1A3A) color-mix(in srgb, var(--tetro-t) 30%, #1A1A3A) color-mix(in srgb, var(--tetro-t) 50%, #4A4A7A);
+}
+.grid-row[data-row="3"] .tile.filled:not(.correct):not(.present):not(.absent) {
+  background: color-mix(in srgb, var(--tetro-s) 30%, var(--color-empty));
+  border-color: color-mix(in srgb, var(--tetro-s) 50%, #4A4A7A) color-mix(in srgb, var(--tetro-s) 30%, #1A1A3A) color-mix(in srgb, var(--tetro-s) 30%, #1A1A3A) color-mix(in srgb, var(--tetro-s) 50%, #4A4A7A);
+}
+.grid-row[data-row="4"] .tile.filled:not(.correct):not(.present):not(.absent) {
+  background: color-mix(in srgb, var(--tetro-l) 30%, var(--color-empty));
+  border-color: color-mix(in srgb, var(--tetro-l) 50%, #4A4A7A) color-mix(in srgb, var(--tetro-l) 30%, #1A1A3A) color-mix(in srgb, var(--tetro-l) 30%, #1A1A3A) color-mix(in srgb, var(--tetro-l) 50%, #4A4A7A);
+}
+.grid-row[data-row="5"] .tile.filled:not(.correct):not(.present):not(.absent) {
+  background: color-mix(in srgb, var(--tetro-j) 30%, var(--color-empty));
+  border-color: color-mix(in srgb, var(--tetro-j) 50%, #4A4A7A) color-mix(in srgb, var(--tetro-j) 30%, #1A1A3A) color-mix(in srgb, var(--tetro-j) 30%, #1A1A3A) color-mix(in srgb, var(--tetro-j) 50%, #4A4A7A);
+}
+
+/* Drop animation when typing */
 .tile.filled {
-  animation: pop 0.1s ease;
-  border-color: #5A5A8A #2A2A4A #2A2A4A #5A5A8A;
+  animation: pieceDrop 0.15s ease-out;
+}
+
+@keyframes pieceDrop {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .tile.revealing {
@@ -174,45 +259,61 @@ body {
   border-color: #5A5A7A #2A2A4A #2A2A4A #5A5A7A;
 }
 
-/* Stats panel */
+/* Stats panel - Classic Tetris style */
 .stats-panel {
   width: 140px;
   padding: 12px;
-  background: linear-gradient(180deg, #1E1E4E 0%, #1C1C3C 100%);
-  border: 3px solid var(--color-grid-line);
-  border-color: #3A3A6A #1A1A3A #1A1A3A #3A3A6A;
+  background: linear-gradient(180deg, #1E1E4E 0%, #0A0A2A 100%);
+  border: 4px solid;
+  border-color: #4A4A8A #1A1A3A #1A1A3A #4A4A8A;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .stats-panel h2 {
   font-size: 10px;
   color: var(--color-accent);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   text-shadow: 0 0 10px var(--color-accent);
+  text-align: center;
+  border-bottom: 2px solid var(--color-grid-line);
+  padding-bottom: 8px;
 }
 
 .stat-row {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   font-size: 8px;
   color: var(--color-stats-text);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.stat-label {
+  color: var(--color-title);
+  margin-bottom: 4px;
+  font-size: 7px;
+  letter-spacing: 1px;
 }
 
 .stat-value {
   color: var(--color-text);
+  font-size: 12px;
+  text-align: right;
 }
 
 .stat-divider {
-  border-top: 1px solid var(--color-grid-line);
+  border-top: 2px solid var(--color-grid-line);
   margin: 12px 0;
 }
 
 .countdown {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--color-accent);
   text-align: center;
   margin-top: 8px;
   text-shadow: 0 0 8px var(--color-accent);
+  padding: 8px;
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid var(--color-grid-line);
 }
 
 /* Keyboard */
@@ -501,12 +602,6 @@ body {
   to { transform: scale(1); opacity: 1; }
 }
 
-@keyframes pop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
 @keyframes flip {
   0% { transform: scaleY(1); }
   50% { transform: scaleY(0); }
@@ -521,19 +616,23 @@ body {
   80% { transform: translateX(4px); }
 }
 
-@keyframes lineClear {
-  0%, 33%, 66% { opacity: 1; }
-  17%, 50%, 83% { opacity: 0.3; }
-  100% { opacity: 1; }
+/* Win animation - Tetris line clear with white flash */
+@keyframes lineClearFlash {
+  0% { background: #FFFFFF; opacity: 1; }
+  20% { background: #FFFFFF; opacity: 1; }
+  40% { background: var(--color-correct); opacity: 0.5; }
+  60% { background: #FFFFFF; opacity: 1; }
+  80% { background: var(--color-correct); opacity: 0.8; }
+  100% { background: var(--color-correct); opacity: 1; }
 }
 
-@keyframes sweep {
+@keyframes lineClearSweep {
   0% {
-    background: linear-gradient(90deg, #FFFFFF 0%, var(--color-correct) 20%, var(--color-correct) 100%);
-    filter: brightness(1.5);
+    box-shadow: 0 0 30px #FFFFFF, 0 0 60px var(--color-correct);
+    filter: brightness(2);
   }
   100% {
-    background: var(--color-correct);
+    box-shadow: 0 0 20px var(--color-correct);
     filter: brightness(1);
   }
 }
@@ -542,14 +641,14 @@ body {
   animation: shake 0.4s ease;
 }
 
-/* Win animation - Tetris line clear effect */
 .grid-row.win-row .tile {
-  animation: lineClear 0.6s ease;
+  animation: lineClearFlash 0.8s ease;
 }
 
 .grid-row.win-sweep .tile {
-  animation: sweep 0.4s ease forwards;
-  box-shadow: 0 0 20px var(--color-correct);
+  animation: lineClearSweep 0.5s ease forwards;
+  background: var(--color-correct) !important;
+  border-color: #66FFaa #009944 #009944 #66FFaa !important;
 }
 
 /* Game over animation */
@@ -583,8 +682,10 @@ body {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    padding: 8px;
+    gap: 12px;
+    padding: 8px 12px;
+    flex-direction: row;
+    align-items: center;
   }
 
   .stats-panel h2 {
@@ -592,7 +693,18 @@ body {
   }
 
   .stat-row {
+    flex-direction: row;
+    gap: 8px;
     margin-bottom: 0;
+    align-items: center;
+  }
+
+  .stat-label {
+    margin-bottom: 0;
+  }
+
+  .stat-value {
+    font-size: 10px;
   }
 
   .stat-divider {
@@ -600,8 +712,10 @@ body {
   }
 
   .countdown {
-    margin-top: 0;
+    margin: 0;
     margin-left: auto;
+    padding: 4px 8px;
+    font-size: 10px;
   }
 
   .key {
@@ -616,6 +730,11 @@ body {
   .popup {
     margin: 16px;
     max-width: calc(100% - 32px);
+  }
+
+  body::before {
+    height: 30%;
+    opacity: 0.4;
   }
 }
 

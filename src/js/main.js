@@ -234,7 +234,6 @@ function showWonState() {
 
 // Show lost state
 function showLostState() {
-  setPopupContent('lose-word', targetWord);
   showGameOver(() => {
     showPopup('lose-popup');
   });
