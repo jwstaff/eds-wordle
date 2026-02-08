@@ -1,6 +1,4 @@
 {
-  "analytics": false,
-  "speedInsights": { "enabled": false },
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "headers": [
