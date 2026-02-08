@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Ed's Wordle</title>
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="title">ED'S WORDLE</h1>
+      <div class="header-buttons">
+        <button id="sound-btn" class="icon-btn" aria-label="Toggle sound"></button>
+        <button id="help-btn" class="icon-btn" aria-label="Help">?</button>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main">
+      <!-- Game area -->
+      <div class="game-area">
+        <div id="grid" class="grid"></div>
+      </div>
+
+      <!-- Stats panel -->
+      <aside class="stats-panel">
+        <h2>STATS</h2>
+        <div class="stat-row">
+          <span class="stat-label">DAY:</span>
+          <span id="stat-day" class="stat-value">1 / 10</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">STREAK:</span>
+          <span id="stat-streak" class="stat-value">0</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">BEST:</span>
+          <span id="stat-best" class="stat-value">0</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-row">
+          <span class="stat-label">NEXT WORD IN</span>
+        </div>
+        <div id="countdown" class="countdown">00:00:00</div>
+      </aside>
+    </main>
+
+    <!-- Keyboard -->
+    <div id="keyboard" class="keyboard"></div>
+
+    <!-- Win Popup -->
+    <div id="win-popup" class="popup-overlay">
+      <div class="popup popup-win">
+        <button id="win-close" class="popup-close">&times;</button>
+        <div class="popup-content">
+          <div class="popup-icon">&#x1F3C6;</div>
+          <div class="popup-title">NOT BAD, ED.</div>
+          <p id="win-message">GUESSED IN 4/6</p>
+          <p>WANT TO SEND IT TO<br>THE FAMILY CHAT?</p>
+          <button id="share-btn" class="popup-btn">SHARE RESULTS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lose Popup -->
+    <div id="lose-popup" class="popup-overlay">
+      <div class="popup popup-lose">
+        <div class="popup-content">
+          <div class="popup-icon">&#x1F4A5;</div>
+          <div class="popup-title">GAME OVER</div>
+          <p>THE WORD WAS:</p>
+          <div id="lose-word" class="reveal-word"></div>
+          <button id="retry-btn" class="popup-btn popup-btn-retry">TRY AGAIN</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Completion Popup -->
+    <div id="complete-popup" class="popup-overlay">
+      <div class="popup popup-complete">
+        <div class="popup-content">
+          <div class="popup-icon">&#x1F3C6;</div>
+          <div class="popup-title">YOU'VE BEATEN<br>THEM ALL!</div>
+          <div class="complete-stats">
+            <p>FINAL STATS:</p>
+            <p id="complete-stats"></p>
+          </div>
+          <p class="complete-thanks">THANKS FOR PLAYING,<br>ED.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Word Popup -->
+    <div id="newword-popup" class="popup-overlay">
+      <div class="popup">
+        <div class="popup-content">
+          <div class="popup-title">A NEW WORD<br>IS READY!</div>
+          <button id="refresh-btn" class="popup-btn">PLAY NOW</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help Popup -->
+    <div id="help-popup" class="popup-overlay">
+      <div class="popup">
+        <button id="help-close" class="popup-close">&times;</button>
+        <div class="popup-content">
+          <div class="popup-title">HOW TO PLAY</div>
+          <p>GUESS THE WORD IN 6 TRIES.</p>
+          <p>EACH GUESS MUST BE 5 LETTERS.</p>
+          <div class="help-example">
+            <div class="help-tile correct">R</div>
+            <span>CORRECT SPOT</span>
+          </div>
+          <div class="help-example">
+            <div class="help-tile present">A</div>
+            <span>WRONG SPOT</span>
+          </div>
+          <div class="help-example">
+            <div class="help-tile absent">X</div>
+            <span>NOT IN WORD</span>
+          </div>
+          <p class="privacy-notice">NO DATA LEAVES YOUR DEVICE.<br>NO ACCOUNTS, NO TRACKING,<br>NO COOKIES.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
